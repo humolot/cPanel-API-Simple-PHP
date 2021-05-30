@@ -9,6 +9,22 @@ class cPanelApi {
         $this->cPanelPort = $cpanelPort;
     }
     
+      /////////////// Git Repo Management //////////////////
+
+    public function listGitRepo()
+    {
+        $func = "https://$this->cPanelUrl:$this->cPanelPort/execute/VersionControl/retrieve";
+        return $this->exe_cpanel($func);
+    }
+
+
+    public function createGitRepo($name,$repository_root,$repoURL)
+    {
+        $func = "https://$this->cPanelUrl:$this->cPanelPort/execute/VersionControl/create?type=git&name=$name&repository_root=$repository_root&source_repository={\"remote_name\":\"origin\",\"url\":\"$repoURL\"}";
+        return $this->exe_cpanel($func);
+    }
+    
+    
     /////////////// MYSQL CPANEL //////////////////
     
     public function createDataBaseMySQL($database) {
